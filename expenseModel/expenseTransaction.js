@@ -16,3 +16,5 @@ const expenseTransactionSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+module.exports = mongoose.model("ExpenseTransaction", expenseTransactionSchema);
