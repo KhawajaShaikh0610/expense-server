@@ -1,6 +1,6 @@
 const ExpenseTransaction = require("../expenseModel/expenseTransaction.js");
 
-export const getTransactions = async (req, res) => {
+exports.getTransactions = async (req, res) => {
   try {
     const { userId } = req.params;
     const transactions = await ExpenseTransaction.find({ userId }).sort({
@@ -12,7 +12,7 @@ export const getTransactions = async (req, res) => {
   }
 };
 
-export const addTransaction = async (req, res) => {
+exports.addTransaction = async (req, res) => {
   try {
     const { userId, description, amount, type } = req.body;
     const transaction = await ExpenseTransaction.create({
