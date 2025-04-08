@@ -11,6 +11,7 @@ const expenseTransactionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    amount: { type: String,  required: true },
     type: { type: String, enum: ["income", "expense"], required: true },
     createdAt: { type: Date, default: Date.now() },
   },

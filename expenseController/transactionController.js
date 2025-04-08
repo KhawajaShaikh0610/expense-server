@@ -21,6 +21,8 @@ exports.addTransaction = async (req, res) => {
       amount,
       type,
     });
+
+    console.log(transaction)
     res.status(201).json(transaction);
   } catch (error) {
     res.status(400).json({ error: err.message });

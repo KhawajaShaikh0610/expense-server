@@ -18,6 +18,14 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+app.get("/api/health",(req,res)=>{
+  try {
+    console.log("Health check pass")
+  } catch (error) {
+    console.error("Health check failed")
+  }
+})
+
 const PORT = process.env.PORT;
 const server = () => {
   db();
