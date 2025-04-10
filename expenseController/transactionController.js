@@ -1,6 +1,6 @@
 const ExpenseTransaction = require("../expenseModel/expenseTransaction.js");
 
-exports.getTransactions = async (req, res) => {
+const getTransactions = async (req, res) => {
   try {
     const { userId } = req.params;
     const transactions = await ExpenseTransaction.find({ userId }).sort({
@@ -8,11 +8,11 @@ exports.getTransactions = async (req, res) => {
     });
     res.json(transactions);
   } catch (error) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-exports.addTransaction = async (req, res) => {
+const addTransaction = async (req, res) => {
   try {
     const { userId, description, amount, type } = req.body;
     const transaction = await ExpenseTransaction.create({
@@ -25,6 +25,8 @@ exports.addTransaction = async (req, res) => {
     console.log(transaction)
     res.status(201).json(transaction);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
+
+module.exports = { getTransactions, addTransaction };
