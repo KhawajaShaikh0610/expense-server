@@ -27,7 +27,11 @@ exports.adminLogin = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
   try {
-    if (!req.admin) {
+    const { authorization } = req.headers;
+
+    // console.log(req.headers);
+
+    if (!authorization) {
       return res.status(403).json({ message: "Unauthorized access" });
     }
     const users = await expenseUser.find({}, "-password");
@@ -41,10 +45,14 @@ exports.getUserExpenses = async (req, res) => {
   try {
     const { userId } = req.query;
 
+    const { authorization } = req.headers;
+
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
     }
-
+    if (!authorization) {
+      return res.status(403).json({ message: "Unauthorized access" });
+    }
     const expenses = await expenseTransaction.find({ userId });
     res.json(expenses);
   } catch (error) {
