@@ -1,6 +1,7 @@
 const ExpenseUser = require("../expenseModel/expenseUser.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { decryptData } = require("../utils/encrypt.js");
 
 const register = async (req, res) => {
   try {
@@ -24,7 +25,9 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const decryptedPassword = decryptData(password);
+
+    const isMatch = await bcrypt.compare(decryptedPassword, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }

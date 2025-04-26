@@ -17,4 +17,5 @@ router.get("/dashboard", adminAuth, (req, res) => {
 router.get("/users", adminAuth, getAllUsers);
 
 router.get("/expenses", adminAuth, getUserExpenses);
+
 module.exports = router;
